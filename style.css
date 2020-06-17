@@ -40,8 +40,8 @@ header div{
     border-radius: 5px;
 }
 
-/* main section */
 
+/* main section */
 #container{
     width: 40%;
     min-height: 175px;
@@ -119,12 +119,10 @@ header div{
 }
 
 
-
 /* todo list section */
 #todo-sect{
     min-height: 100px;
     width: 100%;
-    /* background-color: grey; */
     border-radius: 10px;
     overflow: hidden;
 }
@@ -138,7 +136,7 @@ header div{
     background-color: aliceblue;
 }
 
-.fa-trash{
+.fa-trash-o{
     color: red;
     font-size: 1.1rem;
 }
