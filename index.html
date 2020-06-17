@@ -16,10 +16,57 @@
 
     <main>
         <div id="container">
-            <div id="input-sect" class="m-tb"></div>
-            <div id="info-sect" class="m-tb"></div>
+            
+            <div id="input-sect" class="m-tb">
+                <input type="text" name="" id="input-item" placeholder="New Todo...">
+            </div>
+            
+            
+            <div id="info-sect" class="m-tb">
+                <div style="margin-left: 1%;" id="total-tasks">
+                    Total Task:
+                    <span id="t-count">5</span>
+                </div>
+
+                <div id="task-sub-cat">
+                    <div id="all-tasks" class="cursor">All</div>
+                    <div id="completed-tasks" class="cursor">Completed</div>
+                    <div id="incomplete-tasks" class="cursor">Incomplete</div>
+                </div>
+            </div>
+
+
             <div id="todo-sect" class="m-tb">
-                <div class=""></div>
+                <div class="todo-item-cont m-tb br-5px">
+                    <div>
+                        <input type="checkbox" class="todo-item">
+                        <label>Item 1</label>
+                    </div>
+                    <div style="padding-right: 1.5%">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>                  
+                </div>
+
+                <div class="todo-item-cont m-tb br-5px">
+                    <div>
+                        <input type="checkbox" class="todo-item">
+                        <label>Item 1</label>
+                    </div>
+                    <div style="padding-right: 1.5%">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>                  
+                </div>
+
+                <div class="todo-item-cont m-tb br-5px">
+                    <div>
+                        <input type="checkbox" class="todo-item">
+                        <label>Item 1</label>
+                    </div>
+                    <div style="padding-right: 1.5%">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>                  
+                </div>              
+                
             </div>
         </div>
     </main>
