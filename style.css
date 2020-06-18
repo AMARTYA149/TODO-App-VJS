@@ -113,6 +113,7 @@ header div{
     border-radius: 2px;
     background-color: yellow;
     padding: 0% 1%;
+    min-width: 11%;
 }
 
 
@@ -161,6 +162,7 @@ header div{
     align-items: center;
     height: 100%;
     width: 90%;
+    justify-content: space-between;
 }
 
 .div1 label, .div1 input {
@@ -173,10 +175,14 @@ header div{
     font-size: 1.1rem;
 }
 
-input[type=checkbox]:checked + label{
+/* input[type=checkbox]:checked + label{
     text-decoration: line-through;
-  }
+  } */
 
+.div1 p{
+    padding-left: 3%;
+    width: 100%;
+}
 
   /* notification of activity */
   #notification {

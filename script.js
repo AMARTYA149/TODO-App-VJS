@@ -1,17 +1,24 @@
 var inputVal = document.getElementById('input-item').value; //input text value variable 
 var completedTasks = [];
 var incompleteTasks = [];
+var taskList = [];
 var totalTaskVal = document.getElementById('t-count'); //total count variable
 var totalTasks = completedTasks.length + incompleteTasks.length;
 var todoContainer = document.getElementById('todo-sect');
 var notificationDiv = document.getElementById('notification');
 var todoItem ;
+var deleteItem;
 
+
+function makeID(str){
+    str = str.toLowerCase();
+    str = str.replace(/\s/g, "");
+    return str;
+}
 
 // function to create new todo div item
 function createTodoItem(task){
-    var idDiv = task.toLowerCase();
-    idDiv = idDiv.replace(/\s/g, "");
+    var idDiv = makeID(task);   
     // console.log(idDiv);
     if(totalTasks === 0)
     {
@@ -22,24 +29,54 @@ function createTodoItem(task){
     // newDiv.id = idDiv;
     newDiv.classList.add('todo-item-cont', 'm-tb', 'br-5px');   // add multiple classes
     var div1 = document.createElement('div');
-    var checkBox = document.createElement('input');
-    var label = document.createElement('label');
+    // var checkBox = document.createElement('input');
+    var p = document.createElement('p');
     div1.classList.add('div1');
-    label.innerHTML = task;
-    checkBox.type = "checkbox";
-    checkBox.classList.add('todo-item');
-    div1.appendChild(checkBox);
-    div1.appendChild(label)
+    p.innerHTML = task;
+    p.id = idDiv;
+    // checkBox.type = "checkbox";
+    p.classList.add('todo-item');
+    // div1.appendChild(checkBox);
+    div1.appendChild(p)
     var div2 = document.createElement('div');
-    div2.innerHTML = `<i class="fa fa-trash-o" id="${idDiv}" aria-hidden="true"></i>`;
+    div2.innerHTML = `<i class="fa fa-trash-o ${idDiv} cursor" aria-hidden="true"></i>`;
     div2.style.paddingRight = "1.5%";
     newDiv.appendChild(div1);
     newDiv.appendChild(div2);
-    incompleteTasks.push(idDiv);
     return newDiv; 
 
 }
 
+//function creating striked todo item
+function createDoneTodoItem(task){
+    var idDiv = makeID(task);   
+    // console.log(idDiv);
+    if(totalTasks === 0)
+    {
+        todoContainer.classList.remove('empty-div');
+        todoContainer.innerText = "";   
+    }
+    var newDiv = document.createElement('div');
+    // newDiv.id = idDiv;
+    newDiv.classList.add('todo-item-cont', 'm-tb', 'br-5px');   // add multiple classes
+    var div1 = document.createElement('div');
+    // var checkBox = document.createElement('input');
+    var p = document.createElement('p');
+    div1.classList.add('div1');
+    p.innerHTML = task;
+    p.style.textDecoration = "line-through";
+    p.id = idDiv;
+    // checkBox.type = "checkbox";
+    p.classList.add('todo-item');
+    // div1.appendChild(checkBox);
+    div1.appendChild(p)
+    var div2 = document.createElement('div');
+    div2.innerHTML = `<i class="fa fa-trash-o ${idDiv} cursor" aria-hidden="true"></i>`;
+    div2.style.paddingRight = "1.5%";
+    newDiv.appendChild(div1);
+    newDiv.appendChild(div2);
+    return newDiv; 
+}
 
 //function to show notification of action done
 function showNotification(type, message){
@@ -64,19 +101,144 @@ function showNotification(type, message){
 
 //function creating new todo
 function createNewTodo(enteredTask) {
+    
     if(event.key === 'Enter') {
+        // console.dir(enteredTask);
         if(enteredTask.value === "")
         {
             showNotification('error', 'Enter a Todo...');
             return;
         }
         todoItem = createTodoItem(enteredTask.value); 
+        incompleteTasks.push(enteredTask.value);
+        enteredTask.value = "";
         setTotalTaskVal();
-        console.log(todoItem);
+        // console.log(todoItem);
         todoContainer.appendChild(todoItem);
         showNotification('success', 'Todo added successfully')
+    }    
+}
+
+
+//function controlling completed and incomplete todos
+document.addEventListener('click', function(ele){
+    // alert(e.target.id);
+    // console.log(e.target.tagName.toLowerCase());
+    // console.log(ele.target.innerText);
+    // console.log(ele.target.classList[2]);
+    if(ele.target.classList[1] === 'fa-trash-o'){
+        var item = ele.target.classList[2]
+        deleteItem = document.getElementById(item);
+        // console.log(deleteItem);
+        console.log(deleteItem.innerText);
     }
-    
+
+    if(ele.target.tagName.toLowerCase() === 'p' && completedTasks.indexOf(ele.target.innerText) === -1)
+    {
+        completedTasks.push(ele.target.innerText);
+        ele.target.style.textDecoration = "line-through";
+        // item = incompleteTasks.filter(e => e === ele.target.id);
+        // console.log(item);
+        incompleteTasks.splice(incompleteTasks.indexOf(ele.target.id), 1);
+    }
+    // console.log(incompleteTasks);
+    // console.log(completedTasks);
+    if(ele.target.id === 'completed-tasks'){
+        todoContainer.innerText = "";
+        if(completedTasks.length === 0)
+        {
+            todoContainer.classList.add('empty-div');
+            todoContainer.innerText = "No TODOs";
+            return;
+        }
+        else
+        {
+            console.log(completedTasks);
+            todoContainer.classList.remove('empty-div');
+            for(let i=0; i<completedTasks.length;i++)
+        {
+            todoItem = createDoneTodoItem(completedTasks[i]);
+            todoContainer.appendChild(todoItem);
+        } 
+        }
+    }
+
+    if(ele.target.id === 'incomplete-tasks'){
+        todoContainer.innerText = "";
+        if(incompleteTasks.length === 0)
+        {
+            todoContainer.classList.add('empty-div');
+            todoContainer.innerText = "No Incomplete TODOs";
+            return;
+        }
+        else 
+        {
+            console.log(incompleteTasks);
+            todoContainer.classList.remove('empty-div');
+            for(let i=0; i<incompleteTasks.length;i++)
+          {
+            todoItem = createTodoItem(incompleteTasks[i]);
+            // console.dir(todoItem);
+            todoContainer.appendChild(todoItem);
+          } 
+
+        }
+    }
+
+    if(ele.target.id === 'all-tasks'){
+        // todoContainer.innerText = "";
+        // if(incompleteTasks.length + completedTasks.length === 0)
+        // {
+        //     todoContainer.classList.add('empty-div');
+        //     todoContainer.innerText = "No Incomplete TODOs";
+        //     return;
+        // }
+        // else 
+        // {
+        //     todoContainer.classList.remove('empty-div');
+        //     for(let i=0; i<incompleteTasks.length;i++)
+        //  {
+        //     todoItem = createTodoItem(incompleteTasks[i]);
+        //     // console.dir(todoItem);
+        //     todoContainer.appendChild(todoItem);
+        //  }  
+        //    for(let i=0; i<completedTasks.length;i++)
+        //   {
+        //   todoItem = createDoneTodoItem(completedTasks[i]);
+        //   todoContainer.appendChild(todoItem);
+        //   } 
+        // }
+        allTodos();
+    }
+    // setTotalTaskVal();
+});
+
+
+//function showing all todos
+function allTodos(){
+    todoContainer.innerText = "";
+        if(incompleteTasks.length + completedTasks.length === 0)
+        {
+            todoContainer.classList.add('empty-div');
+            todoContainer.innerText = "No Incomplete TODOs";
+            return;
+        }
+        else 
+        {
+            todoContainer.classList.remove('empty-div');
+            for(let i=0; i<incompleteTasks.length;i++)
+         {
+            todoItem = createTodoItem(incompleteTasks[i]);
+            // console.dir(todoItem);
+            todoContainer.appendChild(todoItem);
+         }  
+           for(let i=0; i<completedTasks.length;i++)
+          {
+          todoItem = createDoneTodoItem(completedTasks[i]);
+          todoContainer.appendChild(todoItem);
+          } 
+        }
+        return;
 }
 
 
@@ -88,10 +250,10 @@ function setTotalTaskVal() {
         todoContainer.classList.add('empty-div');
         todoContainer.innerText = "No TODOs";
     }
-    else{
-        todoContainer.classList.remove('empty-div');
-        todoContainer.innerText = "";        
-    }
+    // else{
+    //     todoContainer.classList.remove('empty-div');
+    //     todoContainer.innerText = "";        
+    // }
 }
 
 
