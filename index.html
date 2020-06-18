@@ -18,7 +18,7 @@
         <div id="container">
             
             <div id="input-sect" class="m-tb">
-                <input type="text" name="" id="input-item" placeholder="New Todo...">
+                <input type="text" name="" id="input-item" placeholder="New Todo..." onkeydown="createNewTodo(this)">
             </div>
             
             
@@ -37,8 +37,8 @@
 
 
             <div id="todo-sect" class="m-tb">
-                <div class="todo-item-cont m-tb br-5px">
-                    <div>
+                <!-- <div class="todo-item-cont m-tb br-5px">
+                    <div class="div1">
                         <input type="checkbox" class="todo-item">
                         <label>Item 1</label>
                     </div>
@@ -48,30 +48,21 @@
                 </div>
 
                 <div class="todo-item-cont m-tb br-5px">
-                    <div>
+                    <div class="div1">
                         <input type="checkbox" class="todo-item">
                         <label>Item 1</label>
                     </div>
                     <div style="padding-right: 1.5%">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </div>                  
-                </div>
-
-                <div class="todo-item-cont m-tb br-5px">
-                    <div>
-                        <input type="checkbox" class="todo-item">
-                        <label>Item 1</label>
-                    </div>
-                    <div style="padding-right: 1.5%">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    </div>                  
-                </div>              
+                </div>    -->
                 
             </div>
         </div>
     </main>
 
-
+    <div id="notification">
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

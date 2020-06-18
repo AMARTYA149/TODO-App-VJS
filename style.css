@@ -12,7 +12,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:aquamarine;
+    background-color: aquamarine;
     margin-bottom: 3%;
 }
 
@@ -32,6 +32,10 @@ header div{
     margin: 0.5% 0;
 }
 
+.ml-1{
+    margin-left: 1%;
+}
+
 .cursor{
     cursor: pointer;
 }
@@ -40,6 +44,21 @@ header div{
     border-radius: 5px;
 }
 
+.green {
+    background-color: lightgreen;
+}
+
+.red{
+    background-color: lightcoral;
+}
+
+.empty-div{
+    background-color: aqua;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* main section */
 #container{
@@ -76,7 +95,6 @@ header div{
 #info-sect{
     height: 20px;
     width: 100%;
-    /* background-color: grey; */
     border-radius: 5px;
     overflow: hidden;
     display: flex;
@@ -125,7 +143,9 @@ header div{
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
+    /* background-color: lightskyblue; */
 }
+
 
 .todo-item-cont{
     height: 35px;
@@ -136,6 +156,18 @@ header div{
     background-color: aliceblue;
 }
 
+.div1{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 90%;
+}
+
+.div1 label, .div1 input {
+    margin-left: 1.5%;
+}
+
+
 .fa-trash-o{
     color: red;
     font-size: 1.1rem;
@@ -143,6 +175,21 @@ header div{
 
 input[type=checkbox]:checked + label{
     text-decoration: line-through;
+  }
+
+
+  /* notification of activity */
+  #notification {
+      position: fixed;
+      bottom: 3%;
+      left: 3%;
+      height: 30px;
+      width: auto;
+      padding: 0 1%;
+      color: white;
+      align-items: center;
+      border-radius: 5px;   
+      display: none ;   
   }
 
 
