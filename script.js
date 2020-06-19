@@ -85,7 +85,7 @@ function showNotification(type, message){
 
    setTimeout(() => {
        notificationDiv.style.display = 'none';
-   }, 2500);
+   }, 3000);
 }
 
 
