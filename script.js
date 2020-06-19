@@ -111,26 +111,37 @@ function createNewTodo(enteredTask) {
 }
 
 
-//function controlling completed and incomplete todos
+//function deleting todos from completed and incomplete todos
 document.addEventListener('click', function(ele){
     // alert(e.target.id);
     // console.log(e.target.tagName.toLowerCase());
     // console.log(ele.target.innerText);
     // console.log(ele.target.classList[2]);
-    // if(ele.target.classList[1] === 'fa-trash-o'){
-    //     var item = ele.target.classList[2]
-    //     deleteItem = document.getElementById(item);
-    //     // console.log(deleteItem);
-    //     console.log(deleteItem.innerText);
-    // }
+    if(ele.target.classList[1] === 'fa-trash-o'){
+        var item = ele.target.classList[2]
+        deleteItem = document.getElementById(item);
+        console.log(deleteItem);
+        console.log(deleteItem.innerText);
+        const indexI = incompleteTasks.indexOf(deleteItem.innerText);
+        const indexC = completedTasks.indexOf(deleteItem.innerText);
+        if(indexI > -1)
+        {
+            incompleteTasks.splice(indexI, 1);
+        } else if(indexC > -1)
+        {
+            completedTasks.splice(indexC, 1);
+        }
+        setTotalTaskVal();
+        renderAllTodos();
+    }
 
     if(ele.target.tagName.toLowerCase() === 'p' && completedTasks.indexOf(ele.target.innerText) === -1)
     {
         completedTasks.push(ele.target.innerText);
         ele.target.style.textDecoration = "line-through";
         
-        console.log("id", ele.target.id);
-        console.log("text", ele.target.innerText);
+        // console.log("id", ele.target.id);
+        // console.log("text", ele.target.innerText);
         const index = incompleteTasks.indexOf(ele.target.innerText);
         if(index > -1)
         {
@@ -149,7 +160,7 @@ document.addEventListener('click', function(ele){
         }
         else
         {
-            console.log(completedTasks);
+            // console.log(completedTasks);
             todoContainer.classList.remove('empty-div');
             for(let i=0; i<completedTasks.length;i++)
         {
@@ -185,6 +196,7 @@ document.addEventListener('click', function(ele){
 
     if(ele.target.id === 'all-tasks'){        
         renderAllTodos();
+        setTotalTaskVal();
     }
     // setTotalTaskVal();
 });

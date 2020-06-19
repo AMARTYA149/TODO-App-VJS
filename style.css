@@ -60,6 +60,10 @@ header div{
     align-items: center;
 }
 
+.overflow-hidden{
+    overflow: hidden;
+}
+
 /* main section */
 #container{
     width: 40%;
@@ -104,7 +108,7 @@ header div{
 }
 
 #task-sub-cat{
-    width: 33%;
+    width: 40%;
     display: flex;
     justify-content: space-evenly;
 }
