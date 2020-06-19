@@ -19,24 +19,19 @@ function makeID(str){
 // function to create new todo div item
 function createTodoItem(task){
     var idDiv = makeID(task);   
-    // console.log(idDiv);
     if(totalTasks === 0)
     {
         todoContainer.classList.remove('empty-div');
         todoContainer.innerText = "";   
     }
     var newDiv = document.createElement('div');
-    // newDiv.id = idDiv;
     newDiv.classList.add('todo-item-cont', 'm-tb', 'br-5px');   // add multiple classes
     var div1 = document.createElement('div');
-    // var checkBox = document.createElement('input');
     var p = document.createElement('p');
     div1.classList.add('div1');
     p.innerHTML = task;
     p.id = idDiv;
-    // checkBox.type = "checkbox";
     p.classList.add('todo-item');
-    // div1.appendChild(checkBox);
     div1.appendChild(p)
     var div2 = document.createElement('div');
     div2.innerHTML = `<i class="fa fa-trash-o ${idDiv} cursor" aria-hidden="true"></i>`;
@@ -50,14 +45,12 @@ function createTodoItem(task){
 //function creating striked todo item
 function createDoneTodoItem(task){
     var idDiv = makeID(task);   
-    // console.log(idDiv);
     if(totalTasks === 0)
     {
         todoContainer.classList.remove('empty-div');
         todoContainer.innerText = "";   
     }
     var newDiv = document.createElement('div');
-    // newDiv.id = idDiv;
     newDiv.classList.add('todo-item-cont', 'm-tb', 'br-5px');   // add multiple classes
     var div1 = document.createElement('div');
     // var checkBox = document.createElement('input');
@@ -66,9 +59,7 @@ function createDoneTodoItem(task){
     p.innerHTML = task;
     p.style.textDecoration = "line-through";
     p.id = idDiv;
-    // checkBox.type = "checkbox";
     p.classList.add('todo-item');
-    // div1.appendChild(checkBox);
     div1.appendChild(p)
     var div2 = document.createElement('div');
     div2.innerHTML = `<i class="fa fa-trash-o ${idDiv} cursor" aria-hidden="true"></i>`;
@@ -126,23 +117,28 @@ document.addEventListener('click', function(ele){
     // console.log(e.target.tagName.toLowerCase());
     // console.log(ele.target.innerText);
     // console.log(ele.target.classList[2]);
-    if(ele.target.classList[1] === 'fa-trash-o'){
-        var item = ele.target.classList[2]
-        deleteItem = document.getElementById(item);
-        // console.log(deleteItem);
-        console.log(deleteItem.innerText);
-    }
+    // if(ele.target.classList[1] === 'fa-trash-o'){
+    //     var item = ele.target.classList[2]
+    //     deleteItem = document.getElementById(item);
+    //     // console.log(deleteItem);
+    //     console.log(deleteItem.innerText);
+    // }
 
     if(ele.target.tagName.toLowerCase() === 'p' && completedTasks.indexOf(ele.target.innerText) === -1)
     {
         completedTasks.push(ele.target.innerText);
         ele.target.style.textDecoration = "line-through";
-        // item = incompleteTasks.filter(e => e === ele.target.id);
-        // console.log(item);
-        incompleteTasks.splice(incompleteTasks.indexOf(ele.target.id), 1);
+        
+        console.log("id", ele.target.id);
+        console.log("text", ele.target.innerText);
+        const index = incompleteTasks.indexOf(ele.target.innerText);
+        if(index > -1)
+        {
+            incompleteTasks.splice(index, 1);
+        }
+       
     }
-    // console.log(incompleteTasks);
-    // console.log(completedTasks);
+    
     if(ele.target.id === 'completed-tasks'){
         todoContainer.innerText = "";
         if(completedTasks.length === 0)
@@ -161,6 +157,7 @@ document.addEventListener('click', function(ele){
             todoContainer.appendChild(todoItem);
         } 
         }
+
     }
 
     if(ele.target.id === 'incomplete-tasks'){
@@ -183,39 +180,18 @@ document.addEventListener('click', function(ele){
           } 
 
         }
+
     }
 
-    if(ele.target.id === 'all-tasks'){
-        // todoContainer.innerText = "";
-        // if(incompleteTasks.length + completedTasks.length === 0)
-        // {
-        //     todoContainer.classList.add('empty-div');
-        //     todoContainer.innerText = "No Incomplete TODOs";
-        //     return;
-        // }
-        // else 
-        // {
-        //     todoContainer.classList.remove('empty-div');
-        //     for(let i=0; i<incompleteTasks.length;i++)
-        //  {
-        //     todoItem = createTodoItem(incompleteTasks[i]);
-        //     // console.dir(todoItem);
-        //     todoContainer.appendChild(todoItem);
-        //  }  
-        //    for(let i=0; i<completedTasks.length;i++)
-        //   {
-        //   todoItem = createDoneTodoItem(completedTasks[i]);
-        //   todoContainer.appendChild(todoItem);
-        //   } 
-        // }
-        allTodos();
+    if(ele.target.id === 'all-tasks'){        
+        renderAllTodos();
     }
     // setTotalTaskVal();
 });
 
 
 //function showing all todos
-function allTodos(){
+function renderAllTodos(){
     todoContainer.innerText = "";
         if(incompleteTasks.length + completedTasks.length === 0)
         {
