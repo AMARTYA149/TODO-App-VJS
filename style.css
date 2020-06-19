@@ -162,8 +162,17 @@ header div{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: aliceblue;
+    /* background-color: lightcyan; */
 }
+
+.todo-item-cont:nth-of-type(odd) {
+    background-color: lightcyan;
+}
+
+.todo-item-cont:nth-of-type(even) {
+    background-color: lightgoldenrodyellow;
+}
+
 
 .div1{
     display: flex;

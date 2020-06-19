@@ -53,7 +53,6 @@ function createDoneTodoItem(task){
     var newDiv = document.createElement('div');
     newDiv.classList.add('todo-item-cont', 'm-tb', 'br-5px');   // add multiple classes
     var div1 = document.createElement('div');
-    // var checkBox = document.createElement('input');
     var p = document.createElement('p');
     div1.classList.add('div1');
     p.innerHTML = task;
@@ -94,7 +93,7 @@ function showNotification(type, message){
 function createNewTodo(enteredTask) {
     
     if(event.key === 'Enter') {
-        // console.dir(enteredTask);
+    
         if(enteredTask.value === "")
         {
             showNotification('error', 'Enter a Todo...');
@@ -113,10 +112,7 @@ function createNewTodo(enteredTask) {
 
 //function deleting todos from completed and incomplete todos
 document.addEventListener('click', function(ele){
-    // alert(e.target.id);
-    // console.log(e.target.tagName.toLowerCase());
-    // console.log(ele.target.innerText);
-    // console.log(ele.target.classList[2]);
+   
     if(ele.target.classList[1] === 'fa-trash-o'){
         var item = ele.target.classList[2]
         deleteItem = document.getElementById(item);
@@ -131,6 +127,7 @@ document.addEventListener('click', function(ele){
         {
             completedTasks.splice(indexC, 1);
         }
+        showNotification('error', 'Todo Deleted');
         setTotalTaskVal();
         renderAllTodos();
     }
@@ -186,7 +183,6 @@ document.addEventListener('click', function(ele){
             for(let i=0; i<incompleteTasks.length;i++)
           {
             todoItem = createTodoItem(incompleteTasks[i]);
-            // console.dir(todoItem);
             todoContainer.appendChild(todoItem);
           } 
 
@@ -198,7 +194,7 @@ document.addEventListener('click', function(ele){
         renderAllTodos();
         setTotalTaskVal();
     }
-    // setTotalTaskVal();
+    
 });
 
 
@@ -238,10 +234,7 @@ function setTotalTaskVal() {
         todoContainer.classList.add('empty-div');
         todoContainer.innerText = "No TODOs";
     }
-    // else{
-    //     todoContainer.classList.remove('empty-div');
-    //     todoContainer.innerText = "";        
-    // }
+    
 }
 
 
